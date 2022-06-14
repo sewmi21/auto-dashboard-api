@@ -2,7 +2,6 @@ package sewmi.springbootmongodb.model;
 
 import java.util.Date;
 
-
 import org.springframework.data.mongodb.core.mapping.Document;
  
 
@@ -15,7 +14,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection="testResults")
+@Document
 public class TestResultsDTO {
 
 	private String testMethodName;

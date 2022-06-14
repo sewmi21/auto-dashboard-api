@@ -48,18 +48,18 @@ public class TestResultsController {
 		}
 		//Read Single Method Details
 		@GetMapping("/testResults/{testMethodName}")
-		public ResponseEntity<?> getSingleTestResult(@PathVariable String methodName){
+		public ResponseEntity<?> getSingleTestResult(@PathVariable String testMethodName){
 			Optional<TestResultsDTO> testResultsOptional=testResultRepo.findBy(null, null);
 			if (testResultsOptional.isPresent()) {
 				return new ResponseEntity<>(testResultsOptional.get(),HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>("Test Result is not found!"+methodName,HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("Test Result is not found!"+testMethodName,HttpStatus.NOT_FOUND);
 			}
 		}
 		//Updating method with results
 		@PutMapping("/testResults/{testMethodName}")
-		public ResponseEntity<?> UpdateSingleTestResult(@PathVariable("testMethodName")String methodName,@RequestBody TestResultsDTO tr ){
-			Optional<TestResultsDTO> testResultsOptional=testResultRepo.findById(methodName);
+		public ResponseEntity<?> UpdateSingleTestResult(@PathVariable("testMethodName")String testMethodName,@RequestBody TestResultsDTO tr ){
+			Optional<TestResultsDTO> testResultsOptional=testResultRepo.findById(testMethodName);
 			if (testResultsOptional.isPresent()) {
 				TestResultsDTO TRSave=testResultsOptional.get();
 				TRSave.setTestMethodName(tr.getTestMethodName() !=null ? tr.getTestMethodName() : TRSave.getTestMethodName());
@@ -68,15 +68,15 @@ public class TestResultsController {
 				testResultRepo.save(TRSave);
 				return new ResponseEntity<>(testResultsOptional.get(),HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>("Test Result is not found!"+methodName,HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>("Test Result is not found!"+testMethodName,HttpStatus.NOT_FOUND);
 			}
 		}
 		
 		@DeleteMapping("/testResults/{testMethodName}")
-		public ResponseEntity<?> deleteBy(@PathVariable("testMethodName")String methodName){
+		public ResponseEntity<?> deleteBy(@PathVariable("testMethodName")String testMethodName){
 			try {
-				testResultRepo.deleteById(methodName);
-				return new ResponseEntity<>("Successfully deleted with method name!"+methodName,HttpStatus.OK);
+				testResultRepo.deleteById(testMethodName);
+				return new ResponseEntity<>("Successfully deleted with method name!"+testMethodName,HttpStatus.OK);
 			} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
 			}
