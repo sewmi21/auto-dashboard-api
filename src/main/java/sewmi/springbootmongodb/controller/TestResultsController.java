@@ -51,17 +51,18 @@ public class TestResultsController {
 		//Read Single Method Details
 		@GetMapping("/testResults/{testMethodName}")
 		public ResponseEntity<?> getSingleTestResult(@PathVariable String testMethodName){
-			Optional<TestResultsDTO> testResultsOptional=testResultRepo.findBy(null, null);
+			Optional<TestResultsDTO> testResultsOptional=testResultRepo.findBytestMethodName(testMethodName);
 			if (testResultsOptional.isPresent()) {
 				return new ResponseEntity<>(testResultsOptional.get(),HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>("Test Result is not found!"+testMethodName,HttpStatus.NOT_FOUND);
 			}
 		}
+		
 		//Updating method with results
 		@PutMapping("/testResults/{testMethodName}")
 		public ResponseEntity<?> UpdateSingleTestResult(@PathVariable("testMethodName")String testMethodName,@RequestBody TestResultsDTO tr ){
-			Optional<TestResultsDTO> testResultsOptional=testResultRepo.findById(testMethodName);
+			Optional<TestResultsDTO> testResultsOptional=testResultRepo.findBytestMethodName(testMethodName);
 			if (testResultsOptional.isPresent()) {
 				TestResultsDTO TRSave=testResultsOptional.get();
 				TRSave.setTestMethodName(tr.getTestMethodName() !=null ? tr.getTestMethodName() : TRSave.getTestMethodName());

@@ -36,16 +36,6 @@ public class TestSummaryController {
 			}
 	
 			//Read Single Method Details
-//			@GetMapping("/testSummary/{id}")
-//			public ResponseEntity<?> getSingleTestResult(@PathVariable String id){
-//				Optional<TestSummary> testResultsOptional=testSummaryRepository.findBy(null, null);
-//				if (testResultsOptional.isPresent()) {
-//					return new ResponseEntity<>(testResultsOptional.get(),HttpStatus.OK);
-//				} else {
-//					return new ResponseEntity<>("Test id is not found!"+id,HttpStatus.NOT_FOUND);
-//				}
-//			}
-			//Read Single Method Details
 			@GetMapping("/testSummary/{id}")
 			public ResponseEntity<?> getOneTestResult(@PathVariable String id){
 				Optional<TestSummary> testResultsOptional=testSummaryRepository.findById(id);
